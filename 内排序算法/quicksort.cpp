@@ -1,7 +1,7 @@
 //write on 20200123
 //update on 20210129
 //本写法参考了英文教材；区别于《啊哈算法》中的写法，这种写法本质上选取
-//最右侧元素为pivot（因为无论怎么选取pivot，都要和最右侧元素进行交换，因此扫描顺序是先左后右
+//最右侧元素为pivot（因为无论怎么选取pivot，都要和最右侧元素进行交换），因此扫描顺序是先左后右
 #include<iostream>
 #include<cmath>
 using namespace std;
@@ -28,8 +28,8 @@ void quicksort(int left,int right){ //left为要进行快速排序的序列的�
 		while((lp < rp) && (arr[rp] >= pivot)) rp--; //右侧指针从右往左扫描，找到第一个比pivot小的元素
 		swap(lp,rp); //交换左右指针所指的元素
 	}
-	index = lp; //lp==rp将原序列分解为两个子序列，左侧子序列都是比pivot小的元素，右侧子序列都是比pivot大的元素
-	swap(right,index);
+	int brkp = lp; //lp==rp将原序列分解为两个子序列，左侧子序列都是比pivot小的元素，右侧子序列都是比pivot大的元素
+	swap(right,brkp);
 	quicksort(left,brkp-1); //对左侧子序列进行快速排序
 	quicksort(brkp+1,right); //对右侧子序列进行快速排序
 }
