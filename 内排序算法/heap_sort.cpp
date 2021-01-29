@@ -1,4 +1,4 @@
-//write on 20191120
+//create on 20191120
 #include<iostream>
 #include<math.h>
 

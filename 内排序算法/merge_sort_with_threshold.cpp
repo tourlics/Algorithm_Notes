@@ -1,4 +1,4 @@
-//write on 20191201
+//create on 20191201
 //带有阈值的归并排序：当小于一定阈值时，直接调用快速排序 
 #include<iostream>
 #define threshold 3

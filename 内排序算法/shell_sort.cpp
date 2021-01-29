@@ -1,5 +1,4 @@
-//write on 20191123
-//update on 20210129
+//create on 20191123;update on 20210129
 //希尔排序
 #include<iostream>
 using namespace std;

@@ -1,4 +1,4 @@
-//write on 20191201
+//create on 20191201
 #include<iostream>
 #include<math.h>
 using namespace std;

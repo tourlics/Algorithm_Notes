@@ -1,4 +1,4 @@
-//write on 20191104;update on 20210129
+//create on 20191104;update on 20210129
 // 三大基础排序算法：插入排序；冒泡排序；选择排序
 #include<iostream>
 using namespace std;
