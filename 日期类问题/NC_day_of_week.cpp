@@ -1,6 +1,7 @@
 //create on 20210130
 //同NC日期差值.cpp；判断今天（星期日）和输入日期的差值，然后除以7得到星期几
 #include<iostream>
+#include<cstring>
 using namespace std;
 typedef struct Date{
     int year;
@@ -9,6 +10,12 @@ typedef struct Date{
 };
 bool operator!=(Date &t1,Date &t2){ //cpp操作符重载，比较两个结构体是否相等
    return (t1.year!=t2.year)||(t1.mon!=t2.mon)||(t1.day!=t2.day);
+}
+bool operator>(Date &t1,Date &t2){ //cpp操作符重载，比较两个结构体是否相等
+   if(t1.year>t2.year) return true;
+   else if(t1.year==t2.year && t1.mon>t2.mon) return true;
+   else if(t1.year==t2.year && t1.mon==t2.mon && t1.day>t2.day) return true;
+   else return false;
 }
 char month[13][20] = {" ","January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
 char week_day[8][10] = {" ","Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
@@ -58,17 +65,23 @@ Date nextday(Date d){ //计算下一天
 int main(){
     Date dstart,dend;
     char stemp[20];
-    scanf("%4d%s%2d",&dstart.year,stemp,&dstart.day); //注意字符串数组名即代表首地址，因此不加&
-    dstart.mon = chartoint(stemp);
-    memset(stemp,0,sizeof(stemp)); //清空数组stemp，防止后面使用的stemp长度大于上面的stemp
-    scanf("%4d%s%2d",&dend.year,stemp,&dend.day); //注意处理输入的技巧
-    dend.mon = chartoint(stemp);
-    int cnt = 1; //按照题目意思，相邻日期差两天
-    Date dtemp = dstart;
-    while(dtemp!=dend){ //已操作符重载
-        dtemp = nextday(dtemp);
-        cnt ++;
-    }
-    cout<<cnt;
+    dstart.year = 2021;
+    dstart.mon = 1;
+    dstart.day = 31; //20210131是个星期日，保证从数组的头开始计数
+    while(scanf("%d%s%d",&dend.day,stemp,&dend.year)!=EOF){ //当不知道有多少行时采用这种方式
+        dend.mon = chartoint(stemp);
+        if(dstart>dend){ //保证dstart在dend前面
+            Date dt = dend;
+            dend = dstart;
+            dstart = dt;
+        }
+        int cnt = 1; //按照题目意思，相邻日期差两天
+        Date dtemp = dstart;
+        while(dtemp!=dend){ //已操作符重载
+            dtemp = nextday(dtemp);
+            cnt ++;
+        }
+        cout<<week_day[cnt%7]<<endl;
+    } 
     return 0;
 }

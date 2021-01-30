@@ -10,6 +10,12 @@ typedef struct Date{
 bool operator!=(Date &t1,Date &t2){ //cpp操作符重载，比较两个结构体是否相等
    return (t1.year!=t2.year)||(t1.mon!=t2.mon)||(t1.day!=t2.day);
 }
+bool operator>(Date &t1,Date &t2){ //cpp操作符重载，比较两个结构体是否相等
+   if(t1.year>t2.year) return true;
+   else if(t1.year==t2.year && t1.mon>t2.mon) return true;
+   else if(t1.year==t2.year && t1.mon==t2.mon && t1.day>t2.day) return true;
+   else return false;
+}
 int leap_month[] = {-1,31,29,31,30,31,30,31,31,30,31,30,31}; //闰年月份对应的天数
 int usual_month[] = {-1,31,28,31,30,31,30,31,31,30,31,30,31};
 
@@ -49,6 +55,11 @@ int main(){
     Date dstart,dend;
     scanf("%4d%2d%2d",&dstart.year,&dstart.mon,&dstart.day); 
     scanf("%4d%2d%2d",&dend.year,&dend.mon,&dend.day); //注意处理输入的技巧
+    if(dstart>dend){ //保证dstart在dend前面
+        Date dt = dend;
+        dend = dstart;
+        dstart = dt;
+    }
     int cnt = 1; //按照题目意思，相邻日期差两天
     Date dtemp = dstart;
     while(dtemp!=dend){ //已操作符重载
