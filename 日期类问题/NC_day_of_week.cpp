@@ -18,7 +18,7 @@ bool operator>(Date &t1,Date &t2){ //cpp操作符重载，比较两个结构体�
    else return false;
 }
 char month[13][20] = {" ","January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-char week_day[8][10] = {" ","Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+char week_day[8][10] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 int chartoint(char mon[]){ //将输入的字符串转化为整数型
     int i=1;
     for(i=1;i<=12;i++){
@@ -68,20 +68,24 @@ int main(){
     dstart.year = 2021;
     dstart.mon = 1;
     dstart.day = 31; //20210131是个星期日，保证从数组的头开始计数
-    while(scanf("%d%s%d",&dend.day,stemp,&dend.year)!=EOF){ //当不知道有多少行时采用这种方式
+    while(scanf("%d %s %d",&dend.day,stemp,&dend.year)!=EOF){ //当不知道有多少行时采用这种方式
         dend.mon = chartoint(stemp);
+        memset(stemp,0,sizeof(stemp)); //清空数组stemp，防止后面使用的stemp长度大于上面的stemp
+        bool bigger = false; //指示是否进行了交换
         if(dstart>dend){ //保证dstart在dend前面
             Date dt = dend;
             dend = dstart;
             dstart = dt;
+            bigger = true;
         }
-        int cnt = 1; //按照题目意思，相邻日期差两天
+        int cnt = 0; 
         Date dtemp = dstart;
         while(dtemp!=dend){ //已操作符重载
             dtemp = nextday(dtemp);
             cnt ++;
         }
-        cout<<week_day[cnt%7]<<endl;
+        if(bigger) cout<<week_day[((-cnt)%7 + 7)%7]<<endl;//为什么还要加7？因为0+7=7
+        else cout<<week_day[cnt%7]<<endl;
     } 
     return 0;
 }
