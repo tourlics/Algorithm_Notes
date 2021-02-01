@@ -42,9 +42,9 @@ int main(){
         }
         if(x!=1){ //遍历完后如果没有分解完
             fac[k].num = x;
-            fac[k].times = 1;
+            fac[k++].times = 1;
         }
-        for(int j=0;j<=k;j++) ans += fac[j].times;
+        for(int j=0;j<k;j++) ans += fac[j].times;
         cout<<ans<<endl;
     }
     return 0;
