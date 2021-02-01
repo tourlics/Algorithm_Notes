@@ -27,7 +27,7 @@ struct factor{
 int main(){
     int ans = 0;
     int x;
-    int cnt = find_prime(10000);
+    int cnt = find_prime(MAXN-10);
     while(scanf("%d",&x)!=EOF){
         int k = 0;
         for(int i=0;i<cnt && x!=1;i++){
@@ -37,7 +37,7 @@ int main(){
                 x = x/prime[i];
                 tcnt++;
             }
-            fac[k++].num = prime[i];
+            fac[k].num = prime[i];
             fac[k++].times = tcnt;
         }
         if(x!=1){ //遍历完后如果没有分解完
