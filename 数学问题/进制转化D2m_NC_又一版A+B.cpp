@@ -1,3 +1,6 @@
+//create on 20210201
+//十进制转化为m进制
+//牛客网-又一版A+B
 #include<iostream>
 using namespace std;
 int arrx[50]; //存输入a的每一位
