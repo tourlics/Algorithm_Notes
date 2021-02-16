@@ -23,6 +23,7 @@ Node* build(int sp,int ep,int si,int ei){ //sp表示先序数组的起始点，e
     Node* root = newNode(prenode[sp]); //创建一个结点，先序遍历的第一个结点必为根节点
     int pos = innode.find(prenode[sp]);//找到根节点在中序遍历中的位置pos，其左的为根节点的左子树
     if(pos != si){ //以该结点作为所在子树的根结点，且左子树不为空
+    	//pos-si表示左子树中结点的个数
         root->left = build(sp+1,sp+pos-si,si,pos-1); //注意理解每个参数的确定方法
     }
     if(pos != ei){
