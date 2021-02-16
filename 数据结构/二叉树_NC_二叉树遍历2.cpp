@@ -23,7 +23,7 @@ void InOrder(Node *T){ //后序遍历，左右中
 	    InOrder(T->right);
 	}
 }
-int pos;
+int pos; //注意一定要将pos设置为全局变量，而非递归函数的局部变量；后者在返回时pos值也会变化！
 string s;
 Node* build(){
     char x = s[pos++];
